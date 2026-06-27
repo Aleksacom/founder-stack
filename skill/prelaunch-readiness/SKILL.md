@@ -9,8 +9,14 @@ description: >
   launch", wants a security review or pre-launch checklist, mentions RLS, rate
   limits, API-key exposure, security headers, CORS, auth enumeration, secrets in
   the bundle, npm audit / CVEs; or needs a privacy policy, cookie notice, terms of
-  use, DPA, sub-processor list, GDPR / consent-banner decision, or to check whether
-  their legal docs match what the app actually does. Trigger it even if the user
+  use, DPA, sub-processor list, a privacy-regime decision under GDPR, UK GDPR, US
+  state laws (CCPA/CPRA and similar), Brazil LGPD, Canada PIPEDA, or the
+  controller's home-country law (the framework is jurisdiction-agnostic, not
+  EU-only), a consent-banner decision, a cross-border
+  Art-27 representative or processor-DPA / SCC question, a passive-availability
+  "which markets do we target" call, EU consumer withdrawal / ADR / governing-law
+  terms, or to check whether their legal docs match what the app actually does.
+  Trigger it even if the user
   only mentions one piece (e.g. "do I need a cookie banner?", "scan my repo before
   launch") — run the relevant phase.
 ---
@@ -111,11 +117,18 @@ matches reality, and generate/update drafts from `templates/`. It walks the
 controller-vs-processor call, the **sharpened** single-vs-split-terms trigger (split
 only when a business customer is itself a separate controller of its own end-users'
 data — not merely when two user roles exist), the consent-banner decision (banner
-only if non-essential trackers exist), the **cross-border branch** (representative
-appointment + transfer mechanism, fires only on the cross-border trigger),
-retention, data-subject rights + supervisory authority, and the match-docs-to-
-reality cross-check. Templates: `PRIVACY-POLICY.md`, `COOKIE-NOTICE.md`,
-`TERMS-OF-USE.md`, `DPA.md`, `SUBPROCESSORS.md`.
+only if non-essential trackers exist; and **verify an existing gate before
+prescribing one**), the **cross-border branch** (targeting-vs-accessibility /
+**passive-availability** posture, representative appointment, and the transfer
+mechanism — a **signed processor DPA**, not a policy sentence; plus the
+no-transfer single-entity test and its two risk vectors — fires only on the
+cross-border trigger), the **EU consumer-protection branch** (withdrawal rights +
+exemptions, the mandatory intermediary savings clause, the governing-law consumer
+carve-out, and ADR + the **retired EU ODR platform**), retention (incl. the
+**statutory accounting-record floor** from home-country law), data-subject rights +
+supervisory authority, and the match-docs-to-reality cross-check. Templates:
+`PRIVACY-POLICY.md`, `COOKIE-NOTICE.md`, `TERMS-OF-USE.md`, `DPA.md`,
+`SUBPROCESSORS.md`.
 
 ## Phase 3 — Readiness report + fix prompts
 
