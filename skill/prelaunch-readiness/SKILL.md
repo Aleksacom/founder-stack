@@ -106,8 +106,14 @@ failure-case + enumeration tests, the secret/OWASP/data-leak sweep, **HTTP secur
 headers**, environment-variable lockdown, rate limits & cost caps (free-tier vs
 billable), CAPTCHA/honeypot & CORS/SameSite, **email deliverability + built-in-
 provider-email trap**, **dependency / supply-chain (CVEs)**, **feature-flag / dark-
-launch awareness**, and the automated scanner. Adapt to the stack from the Profile;
-the principles are universal even when the implementation differs. Change nothing.
+launch awareness**, the automated scanner, and a **reliability & correctness
+spot-check** (the launch-blocking subset: idempotency on money/side-effects,
+transaction & consistency boundaries, races on money/seat/quota state, and
+external-call timeouts). Adapt to the stack from the Profile; the principles are
+universal even when the implementation differs. Change nothing. The broader
+correctness/performance sweep (N+1, memory growth, resource leaks, algorithmic hot
+paths, API-contract drift, test-gap quality) is **out of scope for launch
+readiness** — name it as a follow-up code audit rather than running it here.
 
 ## Phase 2 — Legal & privacy coverage
 

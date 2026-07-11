@@ -48,7 +48,10 @@ you briefly for what it can't read from the code, and produces the report.
 - **Security audit** — database authorization (RLS / tenant isolation), server-side
   validation, secret/bundle exposure, error-message leaks, auth failure-case &
   enumeration tests, HTTP security headers, rate limits & cost caps, CAPTCHA/CORS/
-  SameSite, email deliverability, dependency CVEs, feature-flag awareness.
+  SameSite, email deliverability, dependency CVEs, feature-flag awareness, and a
+  reliability spot-check for the launch-blocking correctness classes (idempotency on
+  money/side-effects, transaction consistency, races on money/seat/quota state,
+  external-call timeouts).
 - **Legal & privacy coverage** — which of {privacy policy, cookie notice, terms,
   DPA, sub-processor list} you need, what's missing, and a **docs-vs-code mismatch**
   check. Includes generalized templates to fill in.

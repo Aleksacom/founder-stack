@@ -31,6 +31,7 @@ token, SameSite cookie) is LOW/MED defense-in-depth. Say which.
 12. Dependency / supply-chain (CVEs)
 13. Feature-flag / dark-launch awareness
 14. Automated scanner as final gate
+15. Reliability & correctness spot-check (launch-blocking subset)
 
 ---
 
@@ -174,6 +175,46 @@ If the toolchain ships a scanner (CI security review, IDE/agent scanner, platfor
 scanner), treat passing it as the final gate before deploy — no shipping with open
 warnings. If one runs per-change already, that's a strong baseline; if not,
 recommend wiring one in.
+
+## 15. Reliability & correctness spot-check (launch-blocking subset)
+Not a full code-quality audit — this phase stays scoped to launch safety. But four
+correctness classes cause user-visible, hard-to-reverse damage the moment real
+traffic and real money arrive, so they belong in a pre-launch pass. Check only
+these here; the broader correctness/perf sweep (N+1, memory growth, resource leaks,
+algorithmic hot paths, API-contract drift, test-gap analysis) is out of scope for
+launch readiness — route it to a dedicated code-audit pass. Adapted from Ersin
+Koç's 20-prompt vibe-code audit (the launch-relevant subset).
+
+- **Idempotency on money & side-effects.** Any operation that charges, refunds,
+  sends email/SMS, or consumes a limited resource (a seat, a credit, a quota):
+  what happens if it runs **twice** (double-click, client retry, webhook redelivery,
+  at-least-once queue)? Hunt for payments/emails sent twice, counters
+  double-incremented, duplicate rows on retried creates, missing idempotency keys on
+  unsafe endpoints clients retry. Classify each: naturally idempotent / protected by
+  key-or-DB-constraint / **UNSAFE**. An UNSAFE money path is HIGH/CRITICAL. Payment
+  webhooks specifically: confirm the handler is safe under duplicate delivery.
+- **Transaction & consistency boundaries.** Every operation that writes more than
+  one thing (multiple tables, DB + cache, DB + external service, DB + event/publish):
+  is it in a transaction, or does partial failure leave an inconsistent state? Flag
+  cache written before/without the DB commit, events published for changes that then
+  roll back, cross-service writes with no reconciliation. Name the exact inconsistent
+  state each gap produces and who observes it.
+- **Race conditions on shared/limited state.** Scope to the assets where a race costs
+  money or breaks an invariant: balances, seat/quota caps, inventory, uniqueness.
+  Hunt check-then-act (exists-then-create, read-then-update, count-then-add) and
+  non-atomic read-modify-write on those. Describe the interleaving in one sentence and
+  name the enforcement that should exist (DB constraint / atomic update / lock). If
+  the runtime makes a class impossible, say so and move on.
+- **External-call timeouts & resilience.** List every call that leaves the process
+  (HTTP, DB, cache, queue, third-party SDK). For each: is there an explicit timeout
+  (flag infinite-defaults), is failure handled distinctly from success-with-bad-data,
+  can one slow dependency exhaust the caller's connections/threads/event loop, is
+  user-facing behavior on dependency failure defined rather than accidental? A payment
+  or auth dependency with no timeout is HIGH.
+
+Same discipline as the rest of the phase: read-only, provenance-tagged, severity by
+real impact. A theoretical race on a non-money path is LOW; a double-charge or a
+seat-cap bypass is not.
 
 ---
 
