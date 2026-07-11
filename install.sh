@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
-# Pre-Launch Readiness — installer for Claude Code.
-# Copies the skill into your Claude Code skills folder so it's available on every
-# project. Re-run any time to update.
+# Pre-Launch Readiness + Vibe Audit — installer for Claude Code.
+# Copies both skills into your Claude Code skills folder so they're available on
+# every project. Re-run any time to update.
 set -euo pipefail
 
-SKILL_NAME="prelaunch-readiness"
-SRC_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/skill/${SKILL_NAME}"
+SKILLS=("prelaunch-readiness" "vibe-audit")
+REPO_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # Where Claude Code looks for skills:
 #   personal (default) -> ~/.claude/skills/   (available on every project)
@@ -17,18 +17,21 @@ else
   DEST_ROOT="${CLAUDE_SKILLS_DIR:-$HOME/.claude/skills}"
 fi
 
-if [[ ! -f "${SRC_DIR}/SKILL.md" ]]; then
-  echo "✗ Couldn't find the skill at ${SRC_DIR}. Run this from inside the cloned repo." >&2
-  exit 1
-fi
-
-DEST="${DEST_ROOT}/${SKILL_NAME}"
 mkdir -p "${DEST_ROOT}"
-rm -rf "${DEST}"
-cp -R "${SRC_DIR}" "${DEST}"
 
-echo "✓ Installed '${SKILL_NAME}' to: ${DEST}"
+for SKILL_NAME in "${SKILLS[@]}"; do
+  SRC_DIR="${REPO_DIR}/skill/${SKILL_NAME}"
+  if [[ ! -f "${SRC_DIR}/SKILL.md" ]]; then
+    echo "✗ Couldn't find the skill at ${SRC_DIR}. Run this from inside the cloned repo." >&2
+    exit 1
+  fi
+  DEST="${DEST_ROOT}/${SKILL_NAME}"
+  rm -rf "${DEST}"
+  cp -R "${SRC_DIR}" "${DEST}"
+  echo "✓ Installed '${SKILL_NAME}' to: ${DEST}"
+done
+
 echo
 echo "Next: open Claude Code in any project and say"
-echo "      \"run the pre-launch readiness check\""
-echo "      (or just \"scan my repo before launch\" / \"do I need a cookie banner?\")"
+echo "      \"run the pre-launch readiness check\"   (safe + legally covered to launch?)"
+echo "      \"vibe-audit this code\" / \"find the bugs\"   (is the code correct?)"
