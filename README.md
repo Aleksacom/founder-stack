@@ -1,27 +1,30 @@
-# Ship & Sell — three Claude Code skills
+# Design, Ship & Sell — a Claude Code skills toolkit
 
-Three complementary skills covering the full arc of shipping software: **is the code
-correct**, **is it safe and legal to launch**, and **how do you market it**. Each
-answers one question:
+Twelve skills covering the full arc of building software: **decide what to build**,
+**verify the code is correct**, **gate the launch**, and **get customers**. Four
+tools, one pipeline:
 
-- **`vibe-audit`** — *"Is the **code** actually correct and robust?"*
-  Correctness, reliability, performance, tests. Run anytime, repeatedly, during dev.
-- **`prelaunch-readiness`** — *"Is this safe and legally covered enough to **launch**?"*
-  Security + legal/privacy. Run once before go-live.
-- **`marketing`** — *"How do I get **customers** for this?"*
-  Hormozi-style offers, hooks, content calendar, proof, funnel audit. Run after
-  launch prep — or anytime you need marketing assets.
+1. **`layers-*`** (9 skills) — *"What should we build, and is the design sound?"*
+   The Layers of Product Design framework: user research → domain → needs →
+   strategy → conceptual model → interaction flow → surface. Run before and during
+   design.
+2. **`vibe-audit`** — *"Is the **code** actually correct and robust?"*
+   Correctness, reliability, performance, tests. Run anytime, repeatedly, during dev.
+3. **`prelaunch-readiness`** — *"Is this safe and legally covered enough to **launch**?"*
+   Security + legal/privacy. Run once before go-live.
+4. **`marketing`** — *"How do I get **customers** for this?"*
+   Hormozi-style offers, hooks, content calendar, proof, funnel audit.
 
-All three are **honest by construction** — no fabricated findings, no fabricated
-testimonials, no invented product facts. They're plain Markdown Claude Code reads —
-no build, no dependencies.
+All are **honest by construction** — no fabricated findings, no fabricated
+testimonials, no invented product facts, design models flagged as hypotheses until
+there's evidence. Plain Markdown Claude Code reads — no build, no dependencies.
 
-> The repo is named `prelaunch-readiness` for historical reasons; it now ships
-> **three** skills. The clone URL below is unchanged.
+> The repo is named `prelaunch-readiness` for historical reasons; it now ships the
+> whole toolkit. The clone URL below is unchanged.
 
 ---
 
-## Install (one step, installs all three)
+## Install (one step, installs everything)
 
 ```bash
 git clone https://github.com/Aleksacom/prelaunch-readiness.git
@@ -29,37 +32,63 @@ cd prelaunch-readiness
 ./install.sh
 ```
 
-That copies **all three skills** into your Claude Code skills folder
+That copies **every skill** into your Claude Code skills folder
 (`~/.claude/skills/`), so they're available in **every** project. Re-run
-`./install.sh` any time to update.
+`./install.sh` any time to update — it auto-discovers whatever is in `skill/`.
 
 > One project only? `./install.sh --project` from inside that project.
 > Custom location? `CLAUDE_SKILLS_DIR=/your/path ./install.sh`
 
 ---
 
-## Which one do I use?
+## The pipeline — which one when?
 
-|                 | `vibe-audit`                              | `prelaunch-readiness`                    | `marketing`                                  |
-| --------------- | ----------------------------------------- | ---------------------------------------- | -------------------------------------------- |
-| **Question**    | Is the **code** correct & robust?         | Safe + legally covered to **launch**?    | How do I get **customers**?                  |
-| **When**        | Anytime, repeatedly, during dev           | Once, before go-live                     | After launch prep; whenever you need assets  |
-| **Scope**       | Correctness + reliability + perf + tests  | Security **+ legal/privacy**             | Offers, hooks, content, proof, funnel        |
-| **Style**       | Autonomous (reads code, no interview)     | Interactive (interviews you)             | Interactive first run, then reads saved context |
-| **Touches files?** | Read-only, report only                 | Read-only + legal doc drafts             | Writes marketing assets to `marketing/` (never touches code) |
-| **Verdict**     | "First CRITICAL at pass N; here's the list" | "Ready / ready after N fixes / not yet" | Scored & ranked assets, saved as files       |
+|                 | `layers-*` (design)                       | `vibe-audit`                              | `prelaunch-readiness`                    | `marketing`                                  |
+| --------------- | ------------------------------------------ | ----------------------------------------- | ---------------------------------------- | -------------------------------------------- |
+| **Question**    | What to **build**? Is the design sound?    | Is the **code** correct & robust?         | Safe + legally covered to **launch**?    | How do I get **customers**?                  |
+| **When**        | Before & during design                     | Anytime, repeatedly, during dev           | Once, before go-live                     | After launch prep; whenever you need assets  |
+| **Style**       | Interactive working sessions               | Autonomous (reads code, no interview)     | Interactive (interviews you)             | Interactive first run, then reads saved context |
+| **Touches files?** | Captures decisions you choose to keep   | Read-only, report only                    | Read-only + legal doc drafts             | Writes marketing assets to `marketing/` (never code) |
+| **Output**      | Job stories, object maps, flows, decisions | "First CRITICAL at pass N; here's the list" | "Ready / ready after N fixes / not yet" | Scored & ranked assets, saved as files       |
 
-The natural sequence: **vibe-audit** during development → **prelaunch-readiness**
-before you ship → **marketing** to sell what you shipped. The two audit skills
-overlap on security by design (same checks, two lenses: *"is this a bug?"* vs
-*"does this block launch?"*).
-
-Analogy: `vibe-audit` is the mechanic's full inspection; `prelaunch-readiness` is
-the roadworthiness + registration check; `marketing` is how you actually sell the car.
+Natural sequence: **layers** to design it → build it → **vibe-audit** while you code →
+**prelaunch-readiness** before you ship → **marketing** to sell it. Bonus loop:
+`layers-user-needs` produces prioritized user pains — exactly the input the
+`marketing` skill's offer and hook modes feed on.
 
 ---
 
-## Skill 1 — `vibe-audit`
+## Skill group 1 — `layers-*` (product design, 9 skills)
+
+The **Layers of Product Design** framework by [Jamie Mill](https://github.com/jamiemill/layers-skills):
+seven layers from observed user behaviour up to surface polish, with the rule that
+weak lower layers create UX debt in everything above. Each skill runs a structured
+working session at one layer, using named methods (OOUX noun foraging, job stories,
+Opportunity Solution Trees, breadboarding, ubiquitous language, event storming).
+
+**Use it** — say:
+
+- **`/layers-intro`** — load first each session; the framework context the others assume
+- **`/layers-orient`** — "where should I focus?" — audits all 7 layers, names the
+  bottleneck, routes you to the right skill
+
+| Layer | Skill | Produces |
+|---|---|---|
+| 1 · Observed behaviour | `/layers-observed-behaviour` | Confidence-rated job stories from research |
+| 2 · The domain | `/layers-domain` | Concept map, terminology conflicts |
+| 3 · User needs | `/layers-user-needs` | Prioritised job stories (needs, pains, desires) |
+| 4 · Strategy | `/layers-product-strategy` | Opportunity Solution Tree, prioritised bets |
+| 5 · Conceptual model | `/layers-conceptual-model` | Object map, state diagrams, vocabulary |
+| 6 · Interaction & flow | `/layers-interaction-flow` | Breadboard with edge cases |
+| 7 · Surface | `/layers-surface` | Surface audit against the layers below |
+
+Vendored unmodified from [jamiemill/layers-skills](https://github.com/jamiemill/layers-skills)
+(MIT, © Jamie Mill — see [LICENSE-layers-skills](LICENSE-layers-skills)). Update by
+re-vendoring from upstream.
+
+---
+
+## Skill 2 — `vibe-audit`
 
 An autonomous correctness sweep for any codebase — especially AI-/vibe-coded projects
 where "it works" hasn't been stress-tested. It reads the code, runs **20 focused
@@ -93,7 +122,7 @@ wired into a harness with a verification stage and honest provenance.
 
 ---
 
-## Skill 2 — `prelaunch-readiness`
+## Skill 3 — `prelaunch-readiness`
 
 Point Claude Code at your repo and it **scans the code**, asks you only what code
 can't reveal, and gives you one prioritized report covering **security** and
@@ -126,7 +155,7 @@ get apps sued, fined, or breached.
 
 ---
 
-## Skill 3 — `marketing`
+## Skill 4 — `marketing`
 
 A Hormozi-style marketing system with **5 modes** — offers built on the Value
 Equation, hook generation with scoring rubrics, a 30-day content calendar, a proof/
@@ -166,16 +195,16 @@ its way through them.
 
 ---
 
-## How they stay honest (all three)
+## How they stay honest (all of them)
 
 - **No fabrication.** Audit findings are tagged `[verified]` (read in the code, with
   `file:line`) or `[UNVERIFIED]`. Marketing claims must trace to your code, research
-  quotes with sources, or your own statements — gaps are reported, not filled with
-  fiction.
+  quotes with sources, or your own statements. Design models are flagged as
+  hypotheses until there's user evidence.
 - **Code is never touched.** The audits are read-only; `marketing` writes only
-  marketing documents in `marketing/`.
-- **Proportionate.** Severity by real impact, not checklist theater; marketing counts
-  (10 offers, 20+ hooks) exist to feed ranking, and rankings use explicit rubrics.
+  marketing documents; `layers-*` captures only the design decisions you choose to keep.
+- **Proportionate.** Severity by real impact, not checklist theater; rankings use
+  explicit rubrics; layers tells you when a layer *doesn't* need work.
 - **Not legal advice.** `prelaunch-readiness` legal output is draft text with `[CHECK]`
   markers for a lawyer in your jurisdiction to review.
 
@@ -183,13 +212,17 @@ its way through them.
 
 ```
 skill/
+├── layers-intro/ · layers-orient/           # framework context + diagnostic router
+├── layers-observed-behaviour/ · layers-domain/ · layers-user-needs/      # problem space
+├── layers-product-strategy/ · layers-conceptual-model/
+│   · layers-interaction-flow/ · layers-surface/                          # solution space
+├── vibe-audit/
+│   ├── SKILL.md                 # the code-audit orchestrator
+│   └── references/passes.md     # the 20 passes
 ├── prelaunch-readiness/
 │   ├── SKILL.md                 # the launch/legal orchestrator
 │   ├── references/              # intake · security-audit · legal-coverage
 │   └── templates/               # privacy policy, cookie notice, terms, DPA, sub-processors
-├── vibe-audit/
-│   ├── SKILL.md                 # the code-audit orchestrator
-│   └── references/passes.md     # the 20 passes
 └── marketing/
     ├── SKILL.md                 # the 5-mode marketing orchestrator
     └── references/              # value-equation · hook-formulas · proof-types · content-system
@@ -198,6 +231,10 @@ skill/
 You never touch these individually — `install.sh` handles them. They're here if you
 want to read or tailor them.
 
-## License
+## Credits & licenses
 
-MIT — see [LICENSE](LICENSE). Set your name in the LICENSE file before publishing.
+- `layers-*` — [jamiemill/layers-skills](https://github.com/jamiemill/layers-skills),
+  MIT © Jamie Mill, vendored unmodified — [LICENSE-layers-skills](LICENSE-layers-skills).
+- `vibe-audit` passes — adapted from Ersin Koç's audit thread (linked above).
+- `marketing` — adapted from Alex Hormozi's published frameworks.
+- Everything else: MIT — see [LICENSE](LICENSE).
