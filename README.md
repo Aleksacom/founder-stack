@@ -4,6 +4,51 @@
 
 ![Founder Stack pipeline — Design → Build → Audit → Launch → Sell](assets/pipeline.svg)
 
+## How to use it — your project, step by step
+
+After [installing](#install-one-step-installs-everything), open Claude Code in your
+project folder and walk the stages. Each stage is just something you **type into the
+chat** — the skill takes over, asks you questions in plain language, and tells you
+what to run next. You never need to remember the whole map; this section is it.
+
+**1 · DESIGN — before you build (15–30 min)**
+Type `/layers-intro`, then `/layers-orient`. It asks ~7 questions about your idea
+(who is it for, what do you know about them, what exists already…) and shows you a
+table of what's solid and what's guesswork. It then names ONE thing to work on and
+which `/layers-…` skill to run for it. Run that skill, answer its questions, repeat
+until the foundations feel solid. *Existing project? Same commands — orient audits
+what you already have instead of starting from zero.*
+
+**2 · BUILD — set up once, then use daily**
+Type `set up build orchestration`. One-time install into this project (it detects
+your folders, asks you to confirm, tells you to restart Claude Code). From then on,
+start every piece of work with `/change` — e.g. `/change add a login page`. The
+pipeline plans first, asks YOU before big decisions, reviews and tests before every
+commit. This is the stage you live in most days.
+
+**3 · AUDIT — every week or two, and before big merges**
+Type `vibe-audit this code`. Fully automatic — no questions. Come back to a report
+of confirmed bugs sorted by severity, with a suggested fix order. Fix the top ones
+with `/change fix …`, then keep building.
+
+**4 · LAUNCH — once, when you're ready to go live**
+Type `run the pre-launch readiness check`. It scans your code, asks only what code
+can't reveal (where are your users, do you send email…), and returns one verdict:
+ready / ready after N fixes / not yet — with security fixes as ready-to-run prompts
+and draft legal docs (privacy policy, cookie notice, terms) marked for lawyer review.
+
+**5 · SELL — after launch, and whenever you need content**
+Type `create offers for this app`. First run: it reads your project, drafts a summary
+of your product and audience, and asks you to confirm — that becomes its memory for
+this project. Then ask for what you need: `write hooks`, `make a content plan`,
+`audit my funnel`. Everything lands as files in a `marketing/` folder you can reuse.
+
+**Three rules of thumb:** you can enter at any stage (already built? start at 3);
+every skill ends by telling you a sensible next step; and nothing here edits your
+product code without showing you first.
+
+---
+
 Thirteen skills covering the full arc of building software: **decide what to build**,
 **build it with discipline**, **verify the code is correct**, **gate the launch**,
 and **get customers**. Five stages, one pipeline:
