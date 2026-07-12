@@ -49,7 +49,7 @@ product code without showing you first.
 
 ---
 
-Thirteen skills covering the full arc of building software: **decide what to build**,
+Fourteen skills covering the full arc of building software: **decide what to build**,
 **build it with discipline**, **verify the code is correct**, **gate the launch**,
 and **get customers**. Five stages, one pipeline:
 
@@ -66,6 +66,12 @@ and **get customers**. Five stages, one pipeline:
    Security + legal/privacy. Run once before go-live.
 5. **`marketing`** — *"How do I get **customers** for this?"*
    Hormozi-style offers, hooks, content calendar, proof, funnel audit.
+
+Plus one cross-stage utility: **`loop-advisor`** — *"Which Claude Code loop do I
+need?"* Routes any "automate this / keep doing X / check every N minutes" request
+to the right primitive (`/goal`, `/loop`, `/schedule`, or no loop at all) and sets
+every parameter — stop conditions, turn caps, intervals, permissions — explicitly.
+Based on the Claude Code team's [loop taxonomy](https://claude.com/blog/getting-started-with-loops).
 
 All are **honest by construction** — no fabricated findings, no fabricated
 testimonials, no invented product facts, design models flagged as hypotheses until
@@ -328,9 +334,12 @@ skill/
 │   ├── SKILL.md                 # the launch/legal orchestrator
 │   ├── references/              # intake · security-audit · legal-coverage
 │   └── templates/               # privacy policy, cookie notice, terms, DPA, sub-processors
-└── marketing/
-    ├── SKILL.md                 # the 5-mode marketing orchestrator
-    └── references/              # value-equation · hook-formulas · proof-types · content-system
+├── marketing/
+│   ├── SKILL.md                 # the 5-mode marketing orchestrator
+│   └── references/              # value-equation · hook-formulas · proof-types · content-system
+└── loop-advisor/
+    ├── SKILL.md                 # loop routing: interview → primitive → parameters
+    └── references/              # loop-types taxonomy · per-type parameter checklists
 ```
 
 You never touch these individually — `install.sh` handles them. They're here if you
@@ -345,6 +354,8 @@ want to read or tailor them.
   (MIT, same author); tool-agnostic sibling:
   [ai-orchestration-framework](https://github.com/Aleksacom/ai-orchestration-framework).
 - `vibe-audit` passes — adapted from Ersin Koç's audit thread (linked above).
+- `loop-advisor` — built on the Claude Code team's
+  ["Getting started with loops"](https://claude.com/blog/getting-started-with-loops) taxonomy.
 - `marketing` — adapted from Alex Hormozi's published frameworks. Pairs with
   [coreyhaines31/marketingskills](https://github.com/coreyhaines31/marketingskills)
   (MIT © Corey Haines, linked companion — not vendored).
