@@ -1,4 +1,8 @@
-# Design, Build, Ship & Sell — a Claude Code skills toolkit
+# Founder Stack
+
+**Design, build, ship & sell — the full product arc as Claude Code skills.**
+
+![Founder Stack pipeline — Design → Build → Audit → Launch → Sell](assets/pipeline.svg)
 
 Thirteen skills covering the full arc of building software: **decide what to build**,
 **build it with discipline**, **verify the code is correct**, **gate the launch**,
@@ -22,16 +26,16 @@ All are **honest by construction** — no fabricated findings, no fabricated
 testimonials, no invented product facts, design models flagged as hypotheses until
 there's evidence. Plain Markdown Claude Code reads — no build, no dependencies.
 
-> The repo is named `prelaunch-readiness` for historical reasons; it now ships the
-> whole toolkit. The clone URL below is unchanged.
+> Formerly named `prelaunch-readiness` — renamed when the toolkit grew past its
+> first skill. Old links and clones redirect automatically.
 
 ---
 
 ## Install (one step, installs everything)
 
 ```bash
-git clone https://github.com/Aleksacom/prelaunch-readiness.git
-cd prelaunch-readiness
+git clone https://github.com/Aleksacom/founder-stack.git
+cd founder-stack
 ./install.sh
 ```
 

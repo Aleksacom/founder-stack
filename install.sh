@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Design, Ship & Sell — installer for Claude Code.
+# Founder Stack — installer for Claude Code.
 # Copies every skill in skill/ into your Claude Code skills folder so they're
 # available on every project. Re-run any time to update.
 set -euo pipefail
