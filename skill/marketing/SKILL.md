@@ -11,7 +11,7 @@ Hormozi-style marketing system: 5 modes that turn a project into offers, content
 
 ## Step 0 — Context (ALWAYS first, every mode)
 
-1. Read `marketing/context.md` in the project root. If it exists and is current → proceed.
+1. Read `marketing/context.md` in the project root. If it exists and is current → proceed. Also read `.agents/product-marketing.md` if present (context file used by the coreyhaines31/marketingskills collection) — treat it as an additional confirmed context source; don't re-ask what it already answers.
 2. If missing: auto-detect from the codebase — README, landing page copy, app store text, pricing config, package descriptions. Build a draft context: **product, niche, audience, core problem solved, pricing, platforms used, stage (pre-launch/launched/scaling)**.
 3. Present the draft to the user for confirmation/correction. NEVER silently invent facts about the product — every claim in the draft must trace to a file you read or a user statement.
 4. Write confirmed context to `marketing/context.md`. All modes read this file; user corrections update it.

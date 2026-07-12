@@ -280,6 +280,21 @@ The 5 modes are adapted from Alex Hormozi's $100M Offers / $100M Leads framework
 with explicit scoring rubrics and research protocols added so an agent can't fake
 its way through them.
 
+**Going deeper on SELL:** pair this with
+[coreyhaines31/marketingskills](https://github.com/coreyhaines31/marketingskills) —
+47 specialist marketing skills (SEO, ads, CRO, emails, pricing, launch, churn…),
+MIT, actively maintained. Install it alongside; the two systems complement each
+other: `marketing` here is the disciplined workflow spine (research → score → rank →
+files), his skills are deep specialist consultations per channel. Our `marketing`
+skill automatically reads his `.agents/product-marketing.md` context file when
+present, so you never answer the same product questions twice. We deliberately
+**don't vendor** it — 415 fast-moving files are better installed from source:
+
+```bash
+git clone https://github.com/coreyhaines31/marketingskills.git
+cp -R marketingskills/skills/* ~/.claude/skills/
+```
+
 ---
 
 ## How they stay honest (all of them)
@@ -330,5 +345,7 @@ want to read or tailor them.
   (MIT, same author); tool-agnostic sibling:
   [ai-orchestration-framework](https://github.com/Aleksacom/ai-orchestration-framework).
 - `vibe-audit` passes — adapted from Ersin Koç's audit thread (linked above).
-- `marketing` — adapted from Alex Hormozi's published frameworks.
+- `marketing` — adapted from Alex Hormozi's published frameworks. Pairs with
+  [coreyhaines31/marketingskills](https://github.com/coreyhaines31/marketingskills)
+  (MIT © Corey Haines, linked companion — not vendored).
 - Everything else: MIT — see [LICENSE](LICENSE).
