@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
-# Pre-Launch Readiness + Vibe Audit — installer for Claude Code.
-# Copies both skills into your Claude Code skills folder so they're available on
-# every project. Re-run any time to update.
+# Pre-Launch Readiness + Vibe Audit + Marketing — installer for Claude Code.
+# Copies all three skills into your Claude Code skills folder so they're available
+# on every project. Re-run any time to update.
 set -euo pipefail
 
-SKILLS=("prelaunch-readiness" "vibe-audit")
+SKILLS=("prelaunch-readiness" "vibe-audit" "marketing")
 REPO_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # Where Claude Code looks for skills:
@@ -35,3 +35,4 @@ echo
 echo "Next: open Claude Code in any project and say"
 echo "      \"run the pre-launch readiness check\"   (safe + legally covered to launch?)"
 echo "      \"vibe-audit this code\" / \"find the bugs\"   (is the code correct?)"
+echo "      \"create offers for this app\" / \"write hooks\"   (how do I market it?)"
