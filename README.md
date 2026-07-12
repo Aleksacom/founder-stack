@@ -1,18 +1,21 @@
-# Design, Ship & Sell — a Claude Code skills toolkit
+# Design, Build, Ship & Sell — a Claude Code skills toolkit
 
-Twelve skills covering the full arc of building software: **decide what to build**,
-**verify the code is correct**, **gate the launch**, and **get customers**. Four
-tools, one pipeline:
+Thirteen skills covering the full arc of building software: **decide what to build**,
+**build it with discipline**, **verify the code is correct**, **gate the launch**,
+and **get customers**. Five stages, one pipeline:
 
 1. **`layers-*`** (9 skills) — *"What should we build, and is the design sound?"*
    The Layers of Product Design framework: user research → domain → needs →
    strategy → conceptual model → interaction flow → surface. Run before and during
    design.
-2. **`vibe-audit`** — *"Is the **code** actually correct and robust?"*
+2. **`build-orchestration`** — *"How do I **build** without the AI going rogue?"*
+   Installs a 5-agent discipline pipeline (`plan → implement → review → audit →
+   test → commit`) + `/change` command into any project. Run once per project.
+3. **`vibe-audit`** — *"Is the **code** actually correct and robust?"*
    Correctness, reliability, performance, tests. Run anytime, repeatedly, during dev.
-3. **`prelaunch-readiness`** — *"Is this safe and legally covered enough to **launch**?"*
+4. **`prelaunch-readiness`** — *"Is this safe and legally covered enough to **launch**?"*
    Security + legal/privacy. Run once before go-live.
-4. **`marketing`** — *"How do I get **customers** for this?"*
+5. **`marketing`** — *"How do I get **customers** for this?"*
    Hormozi-style offers, hooks, content calendar, proof, funnel audit.
 
 All are **honest by construction** — no fabricated findings, no fabricated
@@ -43,18 +46,20 @@ That copies **every skill** into your Claude Code skills folder
 
 ## The pipeline — which one when?
 
-|                 | `layers-*` (design)                       | `vibe-audit`                              | `prelaunch-readiness`                    | `marketing`                                  |
-| --------------- | ------------------------------------------ | ----------------------------------------- | ---------------------------------------- | -------------------------------------------- |
-| **Question**    | What to **build**? Is the design sound?    | Is the **code** correct & robust?         | Safe + legally covered to **launch**?    | How do I get **customers**?                  |
-| **When**        | Before & during design                     | Anytime, repeatedly, during dev           | Once, before go-live                     | After launch prep; whenever you need assets  |
-| **Style**       | Interactive working sessions               | Autonomous (reads code, no interview)     | Interactive (interviews you)             | Interactive first run, then reads saved context |
-| **Touches files?** | Captures decisions you choose to keep   | Read-only, report only                    | Read-only + legal doc drafts             | Writes marketing assets to `marketing/` (never code) |
-| **Output**      | Job stories, object maps, flows, decisions | "First CRITICAL at pass N; here's the list" | "Ready / ready after N fixes / not yet" | Scored & ranked assets, saved as files       |
+|                 | `layers-*` (design)                       | `build-orchestration`                     | `vibe-audit`                              | `prelaunch-readiness`                    | `marketing`                                  |
+| --------------- | ------------------------------------------ | ------------------------------------------ | ----------------------------------------- | ---------------------------------------- | -------------------------------------------- |
+| **Question**    | What to **build**? Is the design sound?    | How to **build** without AI chaos?         | Is the **code** correct & robust?         | Safe + legally covered to **launch**?    | How do I get **customers**?                  |
+| **When**        | Before & during design                     | Once per project, at build start           | Anytime, repeatedly, during dev           | Once, before go-live                     | After launch prep; whenever you need assets  |
+| **Style**       | Interactive working sessions               | One-time install, then `/change` on every task | Autonomous (reads code, no interview)     | Interactive (interviews you)             | Interactive first run, then reads saved context |
+| **Touches files?** | Captures decisions you choose to keep   | Installs agents + routing into the project | Read-only, report only                    | Read-only + legal doc drafts             | Writes marketing assets to `marketing/` (never code) |
+| **Output**      | Job stories, object maps, flows, decisions | Gated pipeline: plan→review→test→commit    | "First CRITICAL at pass N; here's the list" | "Ready / ready after N fixes / not yet" | Scored & ranked assets, saved as files       |
 
-Natural sequence: **layers** to design it → build it → **vibe-audit** while you code →
-**prelaunch-readiness** before you ship → **marketing** to sell it. Bonus loop:
-`layers-user-needs` produces prioritized user pains — exactly the input the
-`marketing` skill's offer and hook modes feed on.
+Natural sequence: **layers** to design it → **build-orchestration** to build it with
+gates → **vibe-audit** for periodic deep sweeps → **prelaunch-readiness** before you
+ship → **marketing** to sell it. Two loops worth knowing: `layers-user-needs`
+produces prioritized user pains — exactly the input the `marketing` skill's offer
+and hook modes feed on; and build-orchestration's `reviewer` is a per-change gate
+while `vibe-audit` is the whole-codebase sweep — complementary, not redundant.
 
 ---
 
@@ -88,7 +93,40 @@ re-vendoring from upstream.
 
 ---
 
-## Skill 2 — `vibe-audit`
+## Skill 2 — `build-orchestration`
+
+Turns any project into a disciplined AI-development environment. One command
+installs **5 sub-agents + a `/change` slash command + CLAUDE.md routing rules**
+into the current project:
+
+- **cm-planner** — plans every change; surfaces architectural decisions to YOU
+  before code is touched (`STOP_FOR_HUMAN` gate)
+- **cm-decider** — routes questions: "decide now" vs "auto-resolve"
+- **reviewer** — reviews every staged diff before commit; can block
+- **conventions-audit** — enforces decision-doc conventions on phase closure
+- **test-author** — adds tests for new behavior; surfaces source bugs they reveal
+
+Every change then runs: `plan → verify → implement → review → audit → test →
+commit`, with a fast-path for trivial work so routine edits don't drown in ceremony.
+
+**Use it** — open Claude Code in the project and say:
+
+- **"set up build orchestration"** — one-time install (detects your source paths,
+  confirms before touching CLAUDE.md, never silently overwrites)
+- then **`/change <what you want>`** for every piece of work — that's the whole habit
+
+Solves the classic failure: you ask for one feature, the AI changes 12 files,
+decisions get baked in silently, and "why is this here?" surfaces months later.
+Decision docs + gates = paper trail + control.
+
+Agent set vendored from
+[Aleksacom/claude-code-orchestration-agents](https://github.com/Aleksacom/claude-code-orchestration-agents)
+(same author as this toolkit). Tool-agnostic version for Cursor/Kimi/ChatGPT users:
+[ai-orchestration-framework](https://github.com/Aleksacom/ai-orchestration-framework).
+
+---
+
+## Skill 3 — `vibe-audit`
 
 An autonomous correctness sweep for any codebase — especially AI-/vibe-coded projects
 where "it works" hasn't been stress-tested. It reads the code, runs **20 focused
@@ -122,7 +160,7 @@ wired into a harness with a verification stage and honest provenance.
 
 ---
 
-## Skill 3 — `prelaunch-readiness`
+## Skill 4 — `prelaunch-readiness`
 
 Point Claude Code at your repo and it **scans the code**, asks you only what code
 can't reveal, and gives you one prioritized report covering **security** and
@@ -155,7 +193,7 @@ get apps sued, fined, or breached.
 
 ---
 
-## Skill 4 — `marketing`
+## Skill 5 — `marketing`
 
 A Hormozi-style marketing system with **5 modes** — offers built on the Value
 Equation, hook generation with scoring rubrics, a 30-day content calendar, a proof/
@@ -216,6 +254,9 @@ skill/
 ├── layers-observed-behaviour/ · layers-domain/ · layers-user-needs/      # problem space
 ├── layers-product-strategy/ · layers-conceptual-model/
 │   · layers-interaction-flow/ · layers-surface/                          # solution space
+├── build-orchestration/
+│   ├── SKILL.md                 # per-project installer + guide
+│   └── assets/                  # 5 agents · /change command · routing rules · decision-doc spec
 ├── vibe-audit/
 │   ├── SKILL.md                 # the code-audit orchestrator
 │   └── references/passes.md     # the 20 passes
@@ -235,6 +276,10 @@ want to read or tailor them.
 
 - `layers-*` — [jamiemill/layers-skills](https://github.com/jamiemill/layers-skills),
   MIT © Jamie Mill, vendored unmodified — [LICENSE-layers-skills](LICENSE-layers-skills).
+- `build-orchestration` agents — vendored from
+  [Aleksacom/claude-code-orchestration-agents](https://github.com/Aleksacom/claude-code-orchestration-agents)
+  (MIT, same author); tool-agnostic sibling:
+  [ai-orchestration-framework](https://github.com/Aleksacom/ai-orchestration-framework).
 - `vibe-audit` passes — adapted from Ersin Koç's audit thread (linked above).
 - `marketing` — adapted from Alex Hormozi's published frameworks.
 - Everything else: MIT — see [LICENSE](LICENSE).

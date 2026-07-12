@@ -38,6 +38,7 @@ fi
 echo
 echo "Installed ${FOUND} skills. Next: open Claude Code in any project and say"
 echo "      \"/layers-orient\"                            (what should I design first?)"
+echo "      \"set up build orchestration\"               (gated plan→review→test builds)"
 echo "      \"vibe-audit this code\" / \"find the bugs\"   (is the code correct?)"
 echo "      \"run the pre-launch readiness check\"       (safe + legally covered to launch?)"
 echo "      \"create offers for this app\" / \"write hooks\"   (how do I market it?)"
