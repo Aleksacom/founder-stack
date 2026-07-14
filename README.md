@@ -49,7 +49,7 @@ product code without showing you first.
 
 ---
 
-Fourteen skills covering the full arc of building software: **decide what to build**,
+Fifteen skills covering the full arc of building software: **decide what to build**,
 **build it with discipline**, **verify the code is correct**, **gate the launch**,
 and **get customers**. Five stages, one pipeline:
 
@@ -64,8 +64,9 @@ and **get customers**. Five stages, one pipeline:
    Correctness, reliability, performance, tests. Run anytime, repeatedly, during dev.
 4. **`prelaunch-readiness`** — *"Is this safe and legally covered enough to **launch**?"*
    Security + legal/privacy. Run once before go-live.
-5. **`marketing`** — *"How do I get **customers** for this?"*
-   Hormozi-style offers, hooks, content calendar, proof, funnel audit.
+5. **`marketing`** + **`first-customer-finder`** — *"How do I get **customers** for this?"*
+   Hormozi-style offers, hooks, content calendar, proof, funnel audit — plus an
+   evidence-backed hunt for the actual first people to talk to.
 
 Plus one cross-stage utility: **`loop-advisor`** — *"Which Claude Code loop do I
 need?"* Routes any "automate this / keep doing X / check every N minutes" request
@@ -286,6 +287,26 @@ The 5 modes are adapted from Alex Hormozi's $100M Offers / $100M Leads framework
 with explicit scoring rubrics and research protocols added so an agent can't fake
 its way through them.
 
+### `first-customer-finder` — who do I actually talk to?
+
+The other half of SELL: while `marketing` produces the assets, this finds the
+**people**. Give it your product (or let it read `marketing/context.md`) and it
+researches recent public signals — "looking for a tool" posts, first-person pain
+descriptions, workaround complaints, competitor frustration, timing triggers — and
+returns a scored shortlist (weighted 0–100: pain, fit, timing, reachability,
+evidence) where **every prospect carries a cited public source**. Uncited = excluded.
+
+Say: **"find my first customers"** (modes: quick / standard / deep / design-partners /
+b2b / community). Output: `marketing/prospects/report.html` (standalone, shareable) +
+`marketing/prospects.md` — whose pain quotes feed straight back into `marketing`'s
+offer and proof modes.
+
+**Hard rules built in:** public, intentionally-shared info only — no data brokers, no
+login-wall bypassing, no sensitive-attribute targeting (GDPR-conscious by design);
+outreach is **drafted, never sent** — a prospect is a research hypothesis, not a
+consenting buyer. Adapted for Claude Code from
+[Kappaemme-git/codex-first-customer-finder-skill](https://github.com/Kappaemme-git/codex-first-customer-finder-skill) (MIT).
+
 **Going deeper on SELL:** pair this with
 [coreyhaines31/marketingskills](https://github.com/coreyhaines31/marketingskills) —
 47 specialist marketing skills (SEO, ads, CRO, emails, pricing, launch, churn…),
@@ -337,6 +358,10 @@ skill/
 ├── marketing/
 │   ├── SKILL.md                 # the 5-mode marketing orchestrator
 │   └── references/              # value-equation · hook-formulas · proof-types · content-system
+├── first-customer-finder/
+│   ├── SKILL.md                 # evidence-backed prospect research, draft-don't-send
+│   ├── references/              # research framework + scoring · report JSON schema
+│   └── scripts/                 # HTML report generator
 └── loop-advisor/
     ├── SKILL.md                 # loop routing: interview → primitive → parameters
     └── references/              # loop-types taxonomy · per-type parameter checklists
@@ -356,6 +381,9 @@ want to read or tailor them.
 - `vibe-audit` passes — adapted from Ersin Koç's audit thread (linked above).
 - `loop-advisor` — built on the Claude Code team's
   ["Getting started with loops"](https://claude.com/blog/getting-started-with-loops) taxonomy.
+- `first-customer-finder` — adapted for Claude Code from
+  [Kappaemme-git/codex-first-customer-finder-skill](https://github.com/Kappaemme-git/codex-first-customer-finder-skill)
+  (MIT © Kappaemme-git; framework, scoring, and report generator vendored, workflow re-targeted from Codex to Claude Code).
 - `marketing` — adapted from Alex Hormozi's published frameworks. Pairs with
   [coreyhaines31/marketingskills](https://github.com/coreyhaines31/marketingskills)
   (MIT © Corey Haines, linked companion — not vendored).
