@@ -49,7 +49,8 @@ product code without showing you first.
 
 ---
 
-Fifteen skills covering the full arc of building software: **decide what to build**,
+Fifteen core skills plus a 16-scanner SAST suite, covering the full arc of building
+software: **decide what to build**,
 **build it with discipline**, **verify the code is correct**, **gate the launch**,
 and **get customers**. Five stages, one pipeline:
 
@@ -214,6 +215,35 @@ The 20 passes are adapted from
 [Ersin Koç's vibe-code audit thread](https://x.com/ersinkoc/status/2074552091826413695),
 wired into a harness with a verification stage and honest provenance.
 
+### Going deeper — the `sast-*` suite (16 dedicated vulnerability scanners)
+
+`vibe-audit` is the broad sweep. When you want a **deep, dedicated scan for one
+vulnerability class**, reach for the SAST suite — one focused skill per bug type,
+each running recon → parallel-subagent verify → merge:
+
+- **`sast-analysis`** — run this FIRST; maps the tech stack, entry points, data flows,
+  and trust boundaries into `sast/architecture.md` (every scanner below reads it).
+- **`sast-idor`** · **`sast-missingauth`** · **`sast-businesslogic`** — access-control
+  and abuse-of-function (the top risks for a marketplace / multi-user app).
+- **`sast-sqli`** · **`sast-xss`** · **`sast-ssrf`** · **`sast-rce`** · **`sast-ssti`**
+  · **`sast-xxe`** · **`sast-pathtraversal`** · **`sast-fileupload`** · **`sast-graphql`**
+  — injection and input-handling classes.
+- **`sast-jwt`** · **`sast-hardcodedsecrets`** — auth-token and leaked-credential checks.
+- **`sast-report`** — run LAST; consolidates every `sast/*-results.md` into one
+  severity-ranked `sast/final-report.md`.
+
+**Use it** — say `run the sast analysis`, then invoke the scanners you want (e.g.
+"scan for IDOR and missing auth"), then `generate the sast report`. Findings land as
+markdown in a `sast/` folder in your project. Read-only, like vibe-audit — it reports,
+it doesn't patch.
+
+**vibe-audit vs the SAST suite:** vibe-audit = wide, one pass across 20 classes, great
+for "sweep everything fast." The SAST suite = deep, one skill per class with parallel
+verification, great for "seriously hunt IDOR before launch." Use vibe-audit routinely;
+reach for a specific `sast-*` when a class actually matters (payments, auth, multi-tenant
+data). Vendored from
+[utkusen/sast-skills](https://github.com/utkusen/sast-skills) (MIT © Utku Sen).
+
 ---
 
 ## Skill 4 — `prelaunch-readiness`
@@ -349,8 +379,13 @@ skill/
 │   ├── SKILL.md                 # per-project installer + guide
 │   └── assets/                  # 5 agents · /change command · routing rules · decision-doc spec
 ├── vibe-audit/
-│   ├── SKILL.md                 # the code-audit orchestrator
+│   ├── SKILL.md                 # the code-audit orchestrator (broad 20-pass sweep)
 │   └── references/passes.md     # the 20 passes
+├── sast-analysis/ · sast-report/                                # SAST suite: map first, report last
+├── sast-idor/ · sast-missingauth/ · sast-businesslogic/         # access-control & abuse
+├── sast-sqli/ · sast-xss/ · sast-ssrf/ · sast-rce/ · sast-ssti/
+│   · sast-xxe/ · sast-pathtraversal/ · sast-fileupload/ · sast-graphql/   # injection classes
+├── sast-jwt/ · sast-hardcodedsecrets/                           # tokens & leaked secrets
 ├── prelaunch-readiness/
 │   ├── SKILL.md                 # the launch/legal orchestrator
 │   ├── references/              # intake · security-audit · legal-coverage
@@ -379,6 +414,8 @@ want to read or tailor them.
   (MIT, same author); tool-agnostic sibling:
   [ai-orchestration-framework](https://github.com/Aleksacom/ai-orchestration-framework).
 - `vibe-audit` passes — adapted from Ersin Koç's audit thread (linked above).
+- `sast-*` suite (16 scanners) — vendored from
+  [utkusen/sast-skills](https://github.com/utkusen/sast-skills) (MIT © Utku Sen).
 - `loop-advisor` — built on the Claude Code team's
   ["Getting started with loops"](https://claude.com/blog/getting-started-with-loops) taxonomy.
 - `first-customer-finder` — adapted for Claude Code from
