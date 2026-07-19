@@ -148,6 +148,17 @@ Vendored unmodified from [jamiemill/layers-skills](https://github.com/jamiemill/
 (MIT, © Jamie Mill — see [LICENSE-layers-skills](LICENSE-layers-skills)). Update by
 re-vendoring from upstream.
 
+### `reference-driven-design` — build premium UI, not templated slop
+
+The layers skills settle *what* to build; this settles *how the visual build goes* so it
+doesn't come out generic. A reference-first workflow: gather sections you like from real
+sites into a `/reference` folder, map each screenshot to a part of the build, end the
+build prompt with **"ask me clarifying questions before building"** (the highest-value
+line), describe animations concretely, then batch fixes in one message. Hands the final
+quality pass to a taste skill. Say **"build me a landing page"** / **"redesign this to
+look like <site>"**. Method adapted from monokern's "$10,000-level website in Claude Code"
+walkthrough.
+
 ---
 
 ## Skill 2 — `build-orchestration`
@@ -416,6 +427,8 @@ want to read or tailor them.
 - `vibe-audit` passes — adapted from Ersin Koç's audit thread (linked above).
 - `sast-*` suite (16 scanners) — vendored from
   [utkusen/sast-skills](https://github.com/utkusen/sast-skills) (MIT © Utku Sen).
+- `reference-driven-design` — workflow adapted from
+  [monokern's "$10,000-level website in Claude Code"](https://x.com/monokern/status/2071246711222055363) walkthrough.
 - `loop-advisor` — built on the Claude Code team's
   ["Getting started with loops"](https://claude.com/blog/getting-started-with-loops) taxonomy;
   the Loop Readiness Score + L1/L2/L3 rollout ladder adapt
