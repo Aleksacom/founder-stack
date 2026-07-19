@@ -429,6 +429,11 @@ want to read or tailor them.
   [utkusen/sast-skills](https://github.com/utkusen/sast-skills) (MIT © Utku Sen).
 - `reference-driven-design` — workflow adapted from
   [monokern's "$10,000-level website in Claude Code"](https://x.com/monokern/status/2071246711222055363) walkthrough.
+- `ui-ux-pro-max` + `design` · `banner-design` · `ui-styling` · `brand` · `slides` · `design-system` —
+  vendored from [nextlevelbuilder/ui-ux-pro-max-skill](https://github.com/nextlevelbuilder/ui-ux-pro-max-skill)
+  (MIT). `ui-ux-pro-max` is a searchable design-intelligence DB spanning web AND mobile
+  stacks (React Native, Flutter, SwiftUI, Jetpack Compose) — the mobile-UI reference the
+  rest of the design stack lacks.
 - `loop-advisor` — built on the Claude Code team's
   ["Getting started with loops"](https://claude.com/blog/getting-started-with-loops) taxonomy;
   the Loop Readiness Score + L1/L2/L3 rollout ladder adapt
