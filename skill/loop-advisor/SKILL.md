@@ -32,6 +32,21 @@ Read `references/loop-types.md`; apply its decision table. State the chosen type
 
 Read `references/parameters.md`; walk the checklist for the chosen type out loud — every box gets an explicit value, including defaults. Minimum bar for any loop: deterministic done/stop condition, a cap (turns / interval / cancel condition), permissions decided (especially irreversible actions: merge, publish, delete — default them to "leave for user"), and a token note (interval/model justified against how fast the watched thing changes).
 
+## Step 3.5 — Score readiness (gate before delivering)
+
+Read `references/readiness-score.md`. Score the designed loop 0–100 across the 5
+dimensions (sharp goal · verification · stop/circuit-breaker · budget · permissions),
+reusing the values already set in Step 3. State the score and the per-dimension reasoning.
+
+- **70+** → deliver the command (Step 4).
+- **40–69** → name the weak dimensions, fix them, re-score. Don't ship a warning-band loop unattended.
+- **<40** → do NOT give a command; the loop will churn. Redesign the missing piece (usually goal or verification) first.
+
+Also assign a **rollout level**: L1 report-only / L2 assisted (human approves) / L3
+unattended. Never hand out an L3 (auto, no human) loop that hasn't proven L2 — and any
+L3/unattended loop MUST include a circuit breaker (escalate on max-iterations /
+same-error-3× / consecutive-failures / budget-exceeded), stated in the tick prompt.
+
 ## Step 4 — Deliver
 
 1. The exact command, ready to run (`/goal …`, `/loop 10m …`, `/schedule …` prompt) — or the routine text for /schedule.
@@ -50,3 +65,6 @@ Read `references/parameters.md`; walk the checklist for the chosen type out loud
 | 1m polling on a thing that changes hourly | Longest interval that works; match change rate |
 | Loop pre-authorized to merge/publish/delete | Irreversible actions stay with the user unless they explicitly hand them over |
 | Designing a mega-loop for a one-off task | Anti-overkill rule: simplest solution first, loops selectively |
+| Handing out the command without scoring readiness | Step 3.5: score 0–100; <40 churns, don't ship it |
+| Unattended loop with no circuit breaker | Escalate on same-error-3× / consecutive-fails / budget cap — never retry forever |
+| Jumping straight to L3 unattended ("run overnight, merge") | Graduate L1 report → L2 assisted → L3; prove L2 first |

@@ -417,7 +417,9 @@ want to read or tailor them.
 - `sast-*` suite (16 scanners) — vendored from
   [utkusen/sast-skills](https://github.com/utkusen/sast-skills) (MIT © Utku Sen).
 - `loop-advisor` — built on the Claude Code team's
-  ["Getting started with loops"](https://claude.com/blog/getting-started-with-loops) taxonomy.
+  ["Getting started with loops"](https://claude.com/blog/getting-started-with-loops) taxonomy;
+  the Loop Readiness Score + L1/L2/L3 rollout ladder adapt
+  [cobusgreyling/loop-engineering](https://github.com/cobusgreyling/loop-engineering) (MIT).
 - `first-customer-finder` — adapted for Claude Code from
   [Kappaemme-git/codex-first-customer-finder-skill](https://github.com/Kappaemme-git/codex-first-customer-finder-skill)
   (MIT © Kappaemme-git; framework, scoring, and report generator vendored, workflow re-targeted from Codex to Claude Code).
